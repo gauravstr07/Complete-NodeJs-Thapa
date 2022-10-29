@@ -1,20 +1,20 @@
+const http = require("http");
+const url = require("url");
 const fs = require("fs");
 
-const bioData = {
-  name: "Gaurav-Sutar",
-  password: "Akshu2680",
-  age: 22,
-  email: "gauravstr05@gmail.com",
-};
+const port = 5000;
 
-const jsonData = JSON.stringify(bioData);
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.end("Hello exoressJs");
+  } else if (req.url === "/userapi") {
+    fs.readFile(`${__dirname}/json1.json`, "utf-8", (err, data) => {
+      console.log(data);
+      res.end(data);
+    });
+  }
+});
 
-// fs.writeFile("json1.json", jsonData, (err) => {
-//   console.log("Done..😍");
-// });
-
-fs.readFile("json1.json", "utf-8", (err, data) => {
-  console.log(data);
-  const orgData = JSON.parse(data);
-  console.log(orgData);
+server.listen(port, () => {
+  console.log(`server running on port: ${port}📡`);
 });
