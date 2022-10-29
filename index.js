@@ -1,10 +1,20 @@
-const http = require("http");
-const port = 5000;
+const fs = require("fs");
 
-const server = http.createServer((req, res) => {
-  res.end("Hello from http");
-});
+const bioData = {
+  name: "Gaurav-Sutar",
+  password: "Akshu2680",
+  age: 22,
+  email: "gauravstr05@gmail.com",
+};
 
-server.listen(port, () => {
-  console.log(`server running on port: ${port}📡`);
+const jsonData = JSON.stringify(bioData);
+
+// fs.writeFile("json1.json", jsonData, (err) => {
+//   console.log("Done..😍");
+// });
+
+fs.readFile("json1.json", "utf-8", (err, data) => {
+  console.log(data);
+  const orgData = JSON.parse(data);
+  console.log(orgData);
 });
